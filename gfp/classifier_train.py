@@ -294,8 +294,8 @@ def train_one_epoch(
 # ----------------------------
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--csv_path", type=str, default="/scratch/pranamlab/tong/data/gfp/classifier_total_data.csv")
-    ap.add_argument("--out_dir", type=str, default="/scratch/pranamlab/tong/cope/editflows/gfp/classifier_ckpt")
+    ap.add_argument("--csv_path", type=str, default="/scratch/data/gfp/classifier_total_data.csv")
+    ap.add_argument("--out_dir", type=str, default="/scratch/cope/editflows/gfp/classifier_ckpt")
     ap.add_argument("--seed", type=int, default=42)
 
     ap.add_argument("--esm_name", type=str, default="facebook/esm2_t33_650M_UR50D")
