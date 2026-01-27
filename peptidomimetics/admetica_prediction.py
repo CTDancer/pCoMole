@@ -76,7 +76,7 @@ def prediction(smiles_list, trainer, model):
 def main():
     smiles_list = ['CSCC[C@H](NC(=O)[C@H](Cc1ccccc1)NC(=O)CNC(=O)CNC(=O)[C@@H](N)Cc1ccc(O)cc1)C(=O)N[C@@H](CCC(N)=O)C(N)=O']
     trainer = pl.Trainer(logger=False, enable_progress_bar=False, accelerator="cuda", devices=1)
-    models = load_models(ckpt_dir='/scratch/pranamlab/tong/miniconda3/envs/admetica/lib/python3.11/site-packages/admetica/Models')
+    models = load_models(ckpt_dir='/scratch/miniconda3/envs/admetica/lib/python3.11/site-packages/admetica/Models')
     for model in models:
         res = prediction(smiles_list, trainer, model)
         print(res)
