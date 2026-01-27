@@ -35,8 +35,8 @@ def read_fasta_sequences(fasta_path: str):
     return seq_ids, seqs
 
 
-df = pd.read_csv('/scratch/pranamlab/tong/pCoMol/gfp/FPredX/summary_pred_mean_scisor_1.csv')
-_, seqs = read_fasta_sequences('/scratch/pranamlab/tong/pCoMol/gfp/scisor_gfp_1.fasta')
+df = pd.read_csv('/scratch/pCoMol/gfp/FPredX/summary_pred_mean_scisor_1.csv')
+_, seqs = read_fasta_sequences('/scratch/pCoMol/gfp/scisor_gfp_1.fasta')
 # seqs = seqs[:100]
 
 assert len(df) == len(seqs), f"Length mismatch: len(df)={len(df)} vs len(seqs)={len(seqs)}"
