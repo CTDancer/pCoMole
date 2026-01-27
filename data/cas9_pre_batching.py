@@ -10,15 +10,15 @@ from rdkit import RDLogger
 RDLogger.DisableLog('rdApp.*')
 
 import sys
-sys.path.append('/scratch/pranamlab/tong/cope/editflows')
+sys.path.append('/scratch/cope/editflows')
 from smiles_tokenizer.my_tokenizers import SMILES_SPE_Tokenizer
 from smiles_tokenizer.selfies_tokenizers import SelfiesTokenizer
 
 # ---------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------
-CSV_PATH = "/scratch/pranamlab/tong/data/cas9/cas9.csv"          # <- your csv
-OUTPUT_DIR = "/scratch/pranamlab/tong/data/cas9/"  # where to save with save_to_disk
+CSV_PATH = "/scratch/data/cas9/cas9.csv"          # <- your csv
+OUTPUT_DIR = "/scratch/data/cas9/"  # where to save with save_to_disk
 MAX_TOKENS_PER_BATCH = 8192
 TRAIN_RATIO, VAL_RATIO, TEST_RATIO = 0.8, 0.1, 0.1
 
