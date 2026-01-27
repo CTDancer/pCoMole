@@ -9,7 +9,7 @@ from BindEvaluator_models import *
 from DeepDTAGen_models import *
 
 import sys
-sys.path.append('/scratch/pranamlab/tong/pCoMol/')
+sys.path.append('/scratch/pCoMol/')
 from smiles_tokenizer.my_tokenizers import SMILES_SPE_Tokenizer
 
 # ---- QUIET MODE (put these lines at the top of your script) ----
@@ -43,7 +43,7 @@ for name in [
 # from admet_ai import ADMETModel
 import sys
 import os
-sys.path.append('/scratch/pranamlab/tong/ReDi_discrete/smiles')
+sys.path.append('/scratch/ReDi_discrete/smiles')
 import xgboost as xgb
 import numpy as np
 from transformers import AutoModelForMaskedLM
@@ -229,13 +229,13 @@ class Toxicity:
         self.device = device
 
         self.tokenizer = SMILES_SPE_Tokenizer(
-            '/scratch/pranamlab/tong/pCoMol/smiles_tokenizer/new_vocab.txt', 
-            '/scratch/pranamlab/tong/pCoMol/smiles_tokenizer/new_splits.txt'
+            '/scratch/pCoMol/smiles_tokenizer/new_vocab.txt', 
+            '/scratch/pCoMol/smiles_tokenizer/new_splits.txt'
         )
         self.embedding_model = AutoModelForMaskedLM.from_pretrained('aaronfeller/PeptideCLM-23M-all').roformer
         self.embedding_model.to(self.device).eval()
 
-        ckpt = torch.load('/scratch/pranamlab/tong/pCoMol/peptidomimetics/ckpt/toxicity.pt', map_location="cuda", weights_only=False)
+        ckpt = torch.load('/scratch/pCoMol/peptidomimetics/ckpt/toxicity.pt', map_location="cuda", weights_only=False)
         best_params = ckpt["best_params"]
         self.best_params = dict(best_params)
 
@@ -278,7 +278,7 @@ class Toxicity:
 class Solubility:
     
     def __init__(self, device):
-        self.predictor = xgb.Booster(model_file='/scratch/pranamlab/tong/PeptiVerse/src/solubility/best_model_f1.json')
+        self.predictor = xgb.Booster(model_file='/scratch/PeptiVerse/src/solubility/best_model_f1.json')
         self.emb_model = AutoModelForMaskedLM.from_pretrained('aaronfeller/PeptideCLM-23M-all').roformer.to(device)
         self.emb_model.eval()
 
@@ -308,7 +308,7 @@ class Solubility:
 class Permeability:
     
     def __init__(self, device):
-        self.predictor = xgb.Booster(model_file='/scratch/pranamlab/tong/PeptiVerse/src/permeability/best_model.json')
+        self.predictor = xgb.Booster(model_file='/scratch/PeptiVerse/src/permeability/best_model.json')
         self.emb_model = AutoModelForMaskedLM.from_pretrained('aaronfeller/PeptideCLM-23M-all').roformer.to(device)
         self.emb_model.eval()
 
@@ -342,14 +342,14 @@ class Halflife:
         self.apply_log1p = apply_log1p
         self.device = device
 
-        self.predictor = xgb.Booster(model_file="/scratch/pranamlab/tong/pCoMol/peptidomimetics/ckpt/halflife.json")
+        self.predictor = xgb.Booster(model_file="/scratch/pCoMol/peptidomimetics/ckpt/halflife.json")
 
         base = AutoModelForMaskedLM.from_pretrained("aaronfeller/PeptideCLM-23M-all")
         self.emb_model = base.roformer.to(self.device).eval()
 
         self.tokenizer = SMILES_SPE_Tokenizer(
-            "/scratch/pranamlab/tong/PeptiVerse/functions/tokenizer/new_vocab.txt",
-            "/scratch/pranamlab/tong/PeptiVerse/functions/tokenizer/new_splits.txt",
+            "/scratch/PeptiVerse/functions/tokenizer/new_vocab.txt",
+            "/scratch/PeptiVerse/functions/tokenizer/new_splits.txt",
         )
 
     @torch.no_grad()
@@ -499,7 +499,7 @@ class BindingAffinity:
         # peptide embeddings
         self.pep_model = AutoModelForMaskedLM.from_pretrained('aaronfeller/PeptideCLM-23M-all').roformer.to(device)
         self.model = ImprovedBindingPredictor().to(device)
-        checkpoint = torch.load('/scratch/pranamlab/tong/classifiers/binding/best_model.pt', weights_only=False)
+        checkpoint = torch.load('/scratch/classifiers/binding/best_model.pt', weights_only=False)
         self.model.load_state_dict(checkpoint['model_state_dict'])
         
         self.model.eval()
@@ -538,11 +538,11 @@ class SmallMolecule:
     def __init__(self, protein_sequence, device):
         # Admetica
         self.trainer = pl.Trainer(logger=False, enable_progress_bar=False, accelerator="cuda", devices=1)
-        self.models = self.load_models(ckpt_dir='/scratch/pranamlab/tong/miniconda3/envs/admetica/lib/python3.11/site-packages/admetica/Models')
+        self.models = self.load_models(ckpt_dir='/scratch/miniconda3/envs/admetica/lib/python3.11/site-packages/admetica/Models')
 
         # DeepDTAGen
-        model_path = f'/scratch/pranamlab/tong/DeepDTAGen/models/deepdtagen_model_bindingdb.pth'
-        tokenizer_path = f'/scratch/pranamlab/tong/DeepDTAGen/data/bindingdb_tokenizer.pkl'
+        model_path = f'/scratch/DeepDTAGen/models/deepdtagen_model_bindingdb.pth'
+        tokenizer_path = f'/scratch/DeepDTAGen/data/bindingdb_tokenizer.pkl'
 
         with open(tokenizer_path, 'rb') as f:
             tokenizer = pickle.load(f)
@@ -739,8 +739,8 @@ class MotifModel:
             
 class DeepDTAGenModel:
     def __init__(self, protein_sequence, device):
-        model_path = f'/scratch/pranamlab/tong/DeepDTAGen/models/deepdtagen_model_bindingdb.pth'
-        tokenizer_path = f'/scratch/pranamlab/tong/DeepDTAGen/data/bindingdb_tokenizer.pkl'
+        model_path = f'/scratch/DeepDTAGen/models/deepdtagen_model_bindingdb.pth'
+        tokenizer_path = f'/scratch/DeepDTAGen/data/bindingdb_tokenizer.pkl'
 
         with open(tokenizer_path, 'rb') as f:
             tokenizer = pickle.load(f)
