@@ -71,7 +71,7 @@ class GFPExcitationPred:
         self,
         root_dir: str = ".",
         laser: float = 488,
-        mafft_path: str = "/scratch/pranamlab/tong/bin/mafft",
+        mafft_path: str = "/scratch/bin/mafft",
         ref_alignment_fasta: str = "FPredX_mafft.fasta",
         available_res_csv: str = "available_res.csv",
         model_dir: str = "ex_model",
@@ -239,7 +239,7 @@ class GFPBrightPred:
     def __init__(
         self,
         root_dir: str = ".",
-        mafft_path: str = "/scratch/pranamlab/tong/bin/mafft",
+        mafft_path: str = "/scratch/bin/mafft",
         ref_alignment_fasta: str = "FPredX_mafft.fasta",
         available_res_csv: str = "available_res.csv",
         model_dir: str = "bright_model",
