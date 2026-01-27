@@ -10,7 +10,7 @@ import pandas as pd
 from is_peptidomimetic import is_peptidomimetic_not_natural
 
 import sys
-sys.path.append('/scratch/pranamlab/tong/pCoMol')
+sys.path.append('/scratch/pCoMol')
 # from model.base_models import EditFlow, SMILESEditFlowModel
 from model.reparam_models import EditFlow, SMILESEditFlowModel
 from model.utils import generate_from_x0, generate_from_x0_multi_edit
@@ -29,7 +29,7 @@ def build_model_and_stuff(cfg, device):
       source_dist
       (pad_id, bos_id, eos_id)
     """
-    tokenizer = SelfiesTokenizer.load("/scratch/pranamlab/tong/data/selfies/28k_mimetics/tokenizer/vocab.json")
+    tokenizer = SelfiesTokenizer.load("/scratch/data/selfies/28k_mimetics/tokenizer/vocab.json")
     vocab_size = 44
     source_distribution = flow.get_source_distribution(
         source_distribution=cfg.flow.source_distribution,
@@ -142,7 +142,7 @@ def main():
     model = editflow.model.to(device)
     model.eval()
     
-    smiles_df = pd.read_csv('/scratch/pranamlab/tong/data/smiles/smiles.csv')
+    smiles_df = pd.read_csv('/scratch/data/smiles/smiles.csv')
     smiles_candidates = smiles_df['SMILES'].sample(10000, random_state=42).tolist()
 
     # x0 = tokenize_input_str(args.input, tokenizer, bos_id, eos_id, device)
