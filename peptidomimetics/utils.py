@@ -1,0 +1,1 @@
+from DeepDTAGen_models.demo_utils import Tokenizer
