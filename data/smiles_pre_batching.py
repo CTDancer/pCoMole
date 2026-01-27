@@ -5,15 +5,15 @@ from datasets import Dataset, DatasetDict
 from transformers import AutoTokenizer
 
 import sys
-sys.path.append('/scratch/pranamlab/tong/cope/editflows')
+sys.path.append('/scratch/cope/editflows')
 from smiles_tokenizer.my_tokenizers import SMILES_SPE_Tokenizer
 
 # ---------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------
-CSV_PATH = "/scratch/pranamlab/tong/data/smiles/28k_mimetics.csv"          # <- your csv
+CSV_PATH = "/scratch/data/smiles/28k_mimetics.csv"          # <- your csv
 SMILES_COL = "Peptidomimetic_SMILES"
-OUTPUT_DIR = "/scratch/pranamlab/tong/data/smiles/28k_mimetics"  # where to save with save_to_disk
+OUTPUT_DIR = "/scratch/data/smiles/28k_mimetics"  # where to save with save_to_disk
 MAX_TOKENS_PER_BATCH = 1024
 TRAIN_RATIO, VAL_RATIO, TEST_RATIO = 0.8, 0.1, 0.1
 
@@ -37,8 +37,8 @@ test_df  = df.iloc[n_train + n_val:]
 # ------------------------------------------------------------
 # 2) Tokenizer
 # ------------------------------------------------------------
-tokenizer = SMILES_SPE_Tokenizer('/scratch/pranamlab/tong/cope/editflows/smiles_tokenizer/new_vocab.txt',
-                                 '/scratch/pranamlab/tong/cope/editflows/smiles_tokenizer/new_splits.txt')
+tokenizer = SMILES_SPE_Tokenizer('/scratch/cope/editflows/smiles_tokenizer/new_vocab.txt',
+                                 '/scratch/cope/editflows/smiles_tokenizer/new_splits.txt')
 
 def tokenize_smiles(smiles_list):
     enc = tokenizer(
