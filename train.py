@@ -21,7 +21,7 @@ from easydict import EasyDict as edict
 
 import pdb
 
-CONFIG_PATH = '/scratch/pranamlab/tong/pCoMol/configs/config_selfies.yaml'
+CONFIG_PATH = '/scratch/pCoMol/configs/config_selfies.yaml'
 
 def main():
     with open(CONFIG_PATH, 'r') as f:
@@ -47,8 +47,8 @@ def main():
         model = ProteinEditFlowModel(vocab_size=vocab_size, pad_id=pad_id, config=cfg.model)
     elif cfg.task == 'smiles':
         vocab_size = 586
-        tokenizer = SMILES_SPE_Tokenizer('/scratch/pranamlab/tong/pCoMol/editflows/smiles_tokenizer/new_vocab.txt',
-                                         '/scratch/pranamlab/tong/pCoMol/editflows/smiles_tokenizer/new_splits.txt')
+        tokenizer = SMILES_SPE_Tokenizer('/scratch/pCoMol/editflows/smiles_tokenizer/new_vocab.txt',
+                                         '/scratch/pCoMol/editflows/smiles_tokenizer/new_splits.txt')
         source_distribution = flow.get_source_distribution(
             source_distribution=cfg.flow.source_distribution, vocab_size=vocab_size, special_token_ids=[0,1,2,3,4]
         )
@@ -58,7 +58,7 @@ def main():
         model = SMILESEditFlowModel(vocab_size=vocab_size, pad_id=pad_id, config=cfg.model)
     elif cfg.task == 'selfies':
         vocab_size = 44
-        tokenizer = SelfiesTokenizer.load("/scratch/pranamlab/tong/data/selfies/28k_mimetics/tokenizer/vocab.json")
+        tokenizer = SelfiesTokenizer.load("/scratch/data/selfies/28k_mimetics/tokenizer/vocab.json")
         source_distribution = flow.get_source_distribution(
             source_distribution=cfg.flow.source_distribution, vocab_size=vocab_size, special_token_ids=[0,1,2]
         )
@@ -89,19 +89,19 @@ def main():
 
     # Dataloader
     if cfg.task == 'protein':
-        train_dataset = load_from_disk('/scratch/pranamlab/tong/data/cas9/train')
-        val_dataset = load_from_disk('/scratch/pranamlab/tong/data/cas9/validation')
+        train_dataset = load_from_disk('/scratch/data/cas9/train')
+        val_dataset = load_from_disk('/scratch/data/cas9/validation')
         train_dataloader = DataLoader(train_dataset, batch_size=None, shuffle=True, num_workers=4)
         val_dataloader = DataLoader(val_dataset, batch_size=None, shuffle=False, num_workers=4)
     elif cfg.task == 'smiles':
-        train_dataset = load_from_disk('/scratch/pranamlab/tong/data/smiles/28k_mimetics/train')
-        val_dataset = load_from_disk('/scratch/pranamlab/tong/data/smiles/28k_mimetics/validation')
+        train_dataset = load_from_disk('/scratch/data/smiles/28k_mimetics/train')
+        val_dataset = load_from_disk('/scratch/data/smiles/28k_mimetics/validation')
         train_dataloader = DataLoader(train_dataset, batch_size=None, shuffle=True, num_workers=4)
         val_dataloader = DataLoader(val_dataset, batch_size=None, shuffle=False, num_workers=4)
     elif cfg.task == 'selfies':
-        train_dataset = load_from_disk('/scratch/pranamlab/tong/data/selfies/28k_mimetics/train')
-        val_dataset = load_from_disk('/scratch/pranamlab/tong/data/selfies/28k_mimetics/validation')
-        test_dataset  = load_from_disk('/scratch/pranamlab/tong/data/selfies/28k_mimetics/test')
+        train_dataset = load_from_disk('/scratch/data/selfies/28k_mimetics/train')
+        val_dataset = load_from_disk('/scratch/data/selfies/28k_mimetics/validation')
+        test_dataset  = load_from_disk('/scratch/data/selfies/28k_mimetics/test')
 
         train_dataloader = DataLoader(train_dataset, batch_size=None, shuffle=True, num_workers=4)
         val_dataloader = DataLoader(val_dataset, batch_size=None, shuffle=False, num_workers=4)
@@ -142,7 +142,7 @@ def main():
     )
 
     # trainer.fit(editflow, train_dataloader, val_dataloader)
-    trainer.validate(model=editflow, dataloaders=test_dataloader, ckpt_path="/scratch/pranamlab/tong/pCoMol/peptidomimetics/outputs/reparam_selfies_lr3e-4_epoch100_scale1.0_optimal0/checkpoint/epoch0092-val14.67.ckpt")
+    trainer.validate(model=editflow, dataloaders=test_dataloader, ckpt_path="/scratch/pCoMol/peptidomimetics/outputs/reparam_selfies_lr3e-4_epoch100_scale1.0_optimal0/checkpoint/epoch0092-val14.67.ckpt")
 
 if __name__ == '__main__':
     main()
