@@ -7,7 +7,7 @@ from easydict import EasyDict as edict
 from constraints import GFP
 
 import sys
-sys.path.append('/scratch/pranamlab/tong/pCoMol')
+sys.path.append('/scratch/pCoMol')
 # from model.base_models import EditFlow, ProteinEditFlowModel, SMILESEditFlowModel
 from model.reparam_models import EditFlow, ProteinEditFlowModel
 from model.utils import generate_from_x0, generate_from_x0_multi_edit
