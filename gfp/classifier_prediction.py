@@ -159,7 +159,7 @@ def load_model_from_ckpt(ckpt_path: str, device: torch.device) -> GFPClassifier:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--ckpt", type=str, default='/scratch/pranamlab/tong/cope/editflows/gfp/classifier_ckpt/best.pt', help="Path to best.pt")
+    ap.add_argument("--ckpt", type=str, default='/scratch/cope/editflows/gfp/classifier_ckpt/best.pt', help="Path to best.pt")
     ap.add_argument("--seq", type=str, default=None, help="Single protein sequence string")
     ap.add_argument("--fasta", type=str, default=None, help="FASTA file path (multiple sequences)")
     ap.add_argument("--txt", type=str, default=None, help="Text file: one sequence per line")
