@@ -70,7 +70,7 @@ class GFPEmissionPred:
     def __init__(
         self,
         root_dir: str = ".",
-        mafft_path: str = "/scratch/pranamlab/tong/bin/mafft",
+        mafft_path: str = "/scratch/bin/mafft",
         ref_alignment_fasta: str = "FPredX_mafft.fasta",
         available_res_csv: str = "available_res.csv",
         model_dir: str = "em_model",
@@ -223,7 +223,7 @@ class GFPEmissionPred:
         return np.stack(preds, axis=0)
 
 if __name__ == '__main__':
-    pred = GFPEmissionPred(root_dir="/scratch/pranamlab/tong/cope/editflows/gfp/FPredX")
+    pred = GFPEmissionPred(root_dir="/scratch/cope/editflows/gfp/FPredX")
     sequence = 'MVSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSWGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYISGNVYITADKQKNGIKANFKIRHNIEDGGVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFLTAAGITLGMDELYK'
     
     em_max = pred.get_score(sequence)  # float
