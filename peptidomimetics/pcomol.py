@@ -13,7 +13,7 @@ from objectives import *
 from constraints import *
 
 import sys
-sys.path.append('/scratch/pranamlab/tong/pCoMol/')
+sys.path.append('/scratch/pCoMol/')
 from smiles_tokenizer.my_tokenizers import SMILES_SPE_Tokenizer
 import pdb
 
@@ -638,8 +638,8 @@ def main():
 
     editflow, source_dist, selfies_tokenizer, pad_id, bos_id, eos_id, eps_id = build_model_and_stuff(cfg, device)
     smiles_tokenizer = SMILES_SPE_Tokenizer(
-        "/scratch/pranamlab/tong/pCoMol/smiles_tokenizer/new_vocab.txt",
-        "/scratch/pranamlab/tong/pCoMol/smiles_tokenizer/new_splits.txt",
+        "/scratch/pCoMol/smiles_tokenizer/new_vocab.txt",
+        "/scratch/pCoMol/smiles_tokenizer/new_splits.txt",
     )
 
     ckpt = torch.load(args.ckpt, map_location=device)
