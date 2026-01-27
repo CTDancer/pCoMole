@@ -72,7 +72,7 @@ class GFPEmissionPred:
     def __init__(
         self,
         root_dir: str = ".",
-        mafft_path: str = "/scratch/pranamlab/tong/bin/mafft",
+        mafft_path: str = "/scratch/bin/mafft",
         ref_alignment_fasta: str = "FPredX_mafft.fasta",
         available_res_csv: str = "available_res.csv",
         model_dir: str = "em_model",
@@ -240,7 +240,7 @@ class Length:
 
 class GFP:
     def __init__(self, device):
-        self.model, self.max_length = load_model_from_ckpt('/scratch/pranamlab/tong/pCoMol/gfp/classifier_ckpt/best.pt', device)
+        self.model, self.max_length = load_model_from_ckpt('/scratch/pCoMol/gfp/classifier_ckpt/best.pt', device)
         self.device = device
 
     def __call__(self, seq):
