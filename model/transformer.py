@@ -27,7 +27,7 @@ from transformers import EsmModel
 from . import rotary
 
 import sys
-sys.path.append('/scratch/pranamlab/tong/cope/editflows/flow_matching')
+sys.path.append('/scratch/cope/editflows/flow_matching')
 
 import pdb
 
