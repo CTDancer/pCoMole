@@ -10,16 +10,16 @@ from rdkit import RDLogger
 RDLogger.DisableLog('rdApp.*')
 
 import sys
-sys.path.append('/scratch/pranamlab/tong/cope/editflows')
+sys.path.append('/scratch/cope/editflows')
 from smiles_tokenizer.my_tokenizers import SMILES_SPE_Tokenizer
 from smiles_tokenizer.selfies_tokenizers import SelfiesTokenizer
 
 # ---------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------
-CSV_PATH = "/scratch/pranamlab/tong/data/smiles/28k_mimetics.csv"          # <- your csv
+CSV_PATH = "/scratch/data/smiles/28k_mimetics.csv"          # <- your csv
 SMILES_COL = "Peptidomimetic_SMILES"
-OUTPUT_DIR = "/scratch/pranamlab/tong/data/selfies/28k_mimetics"  # where to save with save_to_disk
+OUTPUT_DIR = "/scratch/data/selfies/28k_mimetics"  # where to save with save_to_disk
 MAX_TOKENS_PER_BATCH = 1024
 TRAIN_RATIO, VAL_RATIO, TEST_RATIO = 0.8, 0.1, 0.1
 
@@ -43,7 +43,7 @@ for s in df[SMILES_COL].tolist():
 # ---- Build vocab ----
 tokenizer = SelfiesTokenizer()
 tokenizer.build_vocab(selfies_list, add_semantic_default=False)
-tokenizer.save('/scratch/pranamlab/tong/data/selfies/28k_mimetics/tokenizer', constraints=None)
+tokenizer.save('/scratch/data/selfies/28k_mimetics/tokenizer', constraints=None)
 print(f"Vocabulary Size: {tokenizer.vocab_size}")
 
 random.shuffle(selfies_list)
@@ -59,8 +59,8 @@ test_df  = selfies_list[n_train + n_val:]
 # ------------------------------------------------------------
 # 2) Tokenizer
 # ------------------------------------------------------------
-# tokenizer = SMILES_SPE_Tokenizer('/scratch/pranamlab/tong/cope/editflows/smiles_tokenizer/new_vocab.txt',
-#                                  '/scratch/pranamlab/tong/cope/editflows/smiles_tokenizer/new_splits.txt')
+# tokenizer = SMILES_SPE_Tokenizer('/scratch/cope/editflows/smiles_tokenizer/new_vocab.txt',
+#                                  '/scratch/cope/editflows/smiles_tokenizer/new_splits.txt')
 
 def tokenize_selfies(smiles_list):
     enc = {"input_ids": [], "attention_mask": []}
